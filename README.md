@@ -33,5 +33,5 @@ Projetado para desenvolvedores, DBAs e equipes de infraestrutura que precisam de
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seuusuario/PgAuditGraph.git
+git clone https://github.com/richwrd/PgAuditGraph.git
 cd PgAuditGraph
