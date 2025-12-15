@@ -45,19 +45,19 @@ BEGIN
         v_start_date  := v_date_target;
         v_end_date    := v_start_date + INTERVAL '1 month';
         
-        v_table_name := 'audit.logging_dml_y' || TO_CHAR(v_start_date, 'YYYY') || 'm' || TO_CHAR(v_start_date, 'MM');
+        v_table_name := 'logging_dml_y' || TO_CHAR(v_start_date, 'YYYY') || 'm' || TO_CHAR(v_start_date, 'MM');
 
-        IF TO_REGCLASS(v_table_name) IS NULL THEN
-            v_sql := format('CREATE TABLE IF NOT EXISTS %I PARTITION OF audit.logging_dml FOR VALUES FROM (%L) TO (%L)', 
+        IF TO_REGCLASS('audit.' || v_table_name) IS NULL THEN
+            v_sql := format('CREATE TABLE IF NOT EXISTS audit.%I PARTITION OF audit.logging_dml FOR VALUES FROM (%L) TO (%L)', 
                             v_table_name, v_start_date, v_end_date);
             EXECUTE v_sql;
             
             -- Optimization: Logs are Write-Once (Append Only), fillfactor 100 saves ~10-15% disk space
-            EXECUTE format('ALTER TABLE %I SET (fillfactor = 100)', v_table_name);
+            EXECUTE format('ALTER TABLE audit.%I SET (fillfactor = 100)', v_table_name);
             
-            RAISE NOTICE '[OK] Partition Created: % (Range: % to %)', v_table_name, v_start_date, v_end_date;
+            RAISE NOTICE '[OK] Partition Created: audit.% (Range: % to %)', v_table_name, v_start_date, v_end_date;
         ELSE
-            RAISE NOTICE '[OK] Partition already exists: %', v_table_name;
+            RAISE NOTICE '[OK] Partition already exists: audit.%', v_table_name;
         END IF;
     END LOOP;
 

@@ -25,6 +25,7 @@ DECLARE
   v_operation CHAR(1);
   v_data_old  JSONB;
   v_data_new  JSONB;
+  v_client_ip INET;
 BEGIN
 /*===========================================================================
   
@@ -34,6 +35,9 @@ BEGIN
     * Star this project if it helped you! 
   
 =============================================================================*/
+
+  -- Capture client IP address
+  v_client_ip := COALESCE(inet_client_addr(),'127.0.0.1'::inet);
 
   IF (TG_OP = 'INSERT') THEN
       v_operation := 'I';
@@ -62,7 +66,7 @@ BEGIN
       TG_TABLE_SCHEMA,
       TG_TABLE_NAME,
       v_operation,
-      inet_client_addr(),
+      v_client_ip,
       v_data_old,
       v_data_new
   );
