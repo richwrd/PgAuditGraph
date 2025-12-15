@@ -13,8 +13,6 @@
 
 Designed for developers, DBAs, and infrastructure teams who need reliable traceability of database changes without external dependencies.
 
----
-
 ## 🎯 Why postgres-audit-log?
 
 Unlike heavyweight audit solutions that require external tools or complex setups, **postgres-audit-log** provides:
@@ -24,8 +22,6 @@ Unlike heavyweight audit solutions that require external tools or complex setups
 - ✅ **Easy deployment** - Single SQL file installation
 - ✅ **Flexible configuration** - Control auditing at schema and operation level
 - ✅ **Developer friendly** - JSONB format for easy querying and integration
-
----
 
 ## ✨ Features
 
@@ -39,8 +35,6 @@ Unlike heavyweight audit solutions that require external tools or complex setups
 | 🐘 **Pure PostgreSQL**  | No external extensions or dependencies required                             |
 | 🚀 **Production Ready** | Lightweight and battle-tested                                               |
 | 🔍 **Rich Metadata**    | Captures username, timestamp, transaction ID, and operation context         |
-
----
 
 ## 🚀 Quick Start
 
@@ -61,22 +55,16 @@ psql -d your_database -c "
 
 See the [Quick Start Guide](docs/quick-start.md) for detailed instructions.
 
----
-
 ## 📚 Documentation
 
 - **[Quick Start](docs/quick-start.md)** - Get up and running in minutes
 - **[How It Works](docs/how-it-works.md)** - Understand the architecture and components
 - **[Usage Examples](docs/usage-examples.md)** - Common queries and advanced use cases
 
----
-
 ## 🛠️ Requirements
 
 - **PostgreSQL** 12+ (only tested on version 17 and above)
 - **Superuser privileges** (for trigger creation and schema management)
-
----
 
 ## 📊 Structure Overview
 
@@ -97,13 +85,9 @@ postgres-audit-log/
     ├── usage-examples.md
 ```
 
----
-
 ## 🌟 Show your support
 
 Give a ⭐️ if this project helped you!
-
----
 
 ## 🤝 Contributing
 
@@ -115,19 +99,13 @@ Contributions are welcome! Feel free to:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
----
-
 ## 📚 My Related Projects
 
 - [postgres-ha-cluster-lab](https://github.com/richwrd/postgres-ha-cluster-lab) - PostgreSQL High Availability Cluster with Patroni
 
----
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 <div align="center">
 
