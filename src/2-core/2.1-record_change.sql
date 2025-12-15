@@ -51,17 +51,18 @@ BEGIN
       v_data_old  := row_to_json(OLD.*);
   END IF;
 
-
   INSERT INTO audit.logging_dml (
       schema_name,
       table_name,
       operation,
+      client_ip,
       data_old,
       data_new
   ) VALUES (
       TG_TABLE_SCHEMA,
       TG_TABLE_NAME,
       v_operation,
+      inet_client_addr(),
       v_data_old,
       v_data_new
   );

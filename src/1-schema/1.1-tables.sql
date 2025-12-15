@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS audit.logging_dml (
   table_name  TEXT        NOT NULL,
   operation   CHAR(1)     NOT NULL CHECK (operation IN ('I', 'U', 'D')),
   username    TEXT        NOT NULL DEFAULT CURRENT_USER,
+  client_ip   INET        NULL,
   data_old    JSONB       NULL,
   data_new    JSONB       NULL,
 
@@ -63,6 +64,7 @@ COMMENT ON TABLE  audit.logging_dml             IS 'Records all audited DML oper
 COMMENT ON COLUMN audit.logging_dml.id          IS 'Primary key part';
 COMMENT ON COLUMN audit.logging_dml.operation   IS 'Command type: I (Insert), U (Update) or D (Delete)';
 COMMENT ON COLUMN audit.logging_dml.username    IS 'User who executed the operation';
+COMMENT ON COLUMN audit.logging_dml.client_ip   IS 'IP address of the client that executed the operation';
 COMMENT ON COLUMN audit.logging_dml.created_at  IS 'Operation timestamp (Partition Key)';
 COMMENT ON COLUMN audit.logging_dml.data_old    IS 'Row data BEFORE operation (Update/Delete)';
 COMMENT ON COLUMN audit.logging_dml.data_new    IS 'Row data AFTER operation (Insert/Update)';
@@ -72,9 +74,11 @@ CREATE INDEX IF NOT EXISTS idx_logging_dml_target     ON audit.logging_dml (sche
 CREATE INDEX IF NOT EXISTS idx_logging_dml_created_at ON audit.logging_dml (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_logging_dml_txid       ON audit.logging_dml (txid);
 CREATE INDEX IF NOT EXISTS idx_logging_dml_username   ON audit.logging_dml (username);
+CREATE INDEX IF NOT EXISTS idx_logging_dml_client_ip  ON audit.logging_dml (client_ip);
 CREATE INDEX IF NOT EXISTS idx_logging_dml_operation  ON audit.logging_dml (operation);
 
 COMMENT ON INDEX audit.idx_logging_dml_target     IS 'Optimizes filtering by Schema and Table';
 COMMENT ON INDEX audit.idx_logging_dml_created_at IS 'Optimizes time-range queries';
 COMMENT ON INDEX audit.idx_logging_dml_operation  IS 'Optimizes command type filters';
 COMMENT ON INDEX audit.idx_logging_dml_username   IS 'Optimizes user-based queries';
+COMMENT ON INDEX audit.idx_logging_dml_client_ip  IS 'Optimizes IP-based queries';
