@@ -60,6 +60,7 @@ See the [Quick Start Guide](docs/quick-start.md) for detailed instructions.
 - **[Quick Start](docs/quick-start.md)** - Get up and running in minutes
 - **[How It Works](docs/how-it-works.md)** - Understand the architecture and components
 - **[Usage Examples](docs/usage-examples.md)** - Common queries and advanced use cases
+- **[Comparison with pgAudit](docs/postgres-audit-log-vs-pgaudit.md)** - Differences and complementary features
 
 ## 🛠️ Requirements
 
